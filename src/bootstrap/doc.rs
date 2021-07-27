@@ -437,20 +437,33 @@ impl Step for Std {
                 builder.cargo(compiler, Mode::Std, SourceType::InTree, target, "rustdoc");
             compile::std_cargo(builder, target, compiler.stage, &mut cargo);
 
-            cargo
-                .arg("-p")
-                .arg(package)
-                .arg("-Zskip-rustdoc-fingerprint")
-                .arg("--")
-                .arg("--markdown-css")
-                .arg("rust.css")
-                .arg("--markdown-no-toc")
-                .arg("-Z")
-                .arg("unstable-options")
-                .arg("--resource-suffix")
-                .arg(&builder.version)
-                .arg("--index-page")
-                .arg(&builder.src.join("src/doc/index.md"));
+            if package == "alloc" {
+                cargo.arg("-p").arg(package).arg("-Zskip-rustdoc-fingerprint").arg("--").args([
+                    "--test",
+                    "-Z",
+                    "unstable-options",
+                    "--test-builder",
+                    "src/tools/dashboard/print.sh",
+                    "--persist-doctests",
+                    "build/alloc",
+                    "--no-run",
+                ]);
+            } else {
+                cargo
+                    .arg("-p")
+                    .arg(package)
+                    .arg("-Zskip-rustdoc-fingerprint")
+                    .arg("--")
+                    .arg("--markdown-css")
+                    .arg("rust.css")
+                    .arg("--markdown-no-toc")
+                    .arg("-Z")
+                    .arg("unstable-options")
+                    .arg("--resource-suffix")
+                    .arg(&builder.version)
+                    .arg("--index-page")
+                    .arg(&builder.src.join("src/doc/index.md"));
+            }
 
             if !builder.config.docs_minification {
                 cargo.arg("--disable-minification");

@@ -7,7 +7,7 @@
 # simply copies the contents of stdin to the location where `rustdoc` caches the
 # "compiled" output.
 
-FILE="$6"
+FILE="${10}"
 BASE=`basename "$FILE"`
 mkdir -p "$BASE"
 cp "/dev/stdin" "$FILE"
