@@ -8,3 +8,6 @@ edition = "2018"
 
 [dependencies]
 pulldown-cmark = { version = "0.8.0", default-features = false }
+tera = { version = "1.12.1", default-features = false }
+serde = {version = "1.0.126", features = ["derive"] }
+walkdir = "2.3.2"

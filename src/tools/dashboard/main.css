@@ -1,0 +1,39 @@
+.row {
+    cursor: pointer;
+    padding: 0;
+    width: 100%;
+    border: none;
+    padding: 18px 0px;
+    font-size: 15px;
+    outline: none;
+    display: flex;
+}
+
+.symbol {
+    text-align: right;
+    font-weight: bold;
+    padding-right: 2px;
+}
+
+.name {
+    text-align: left;
+    width: 40%;
+}
+
+.pass {
+    text-align: center;
+    color: green;
+    width: 30%;
+}
+
+.fail {
+    text-align: center;
+    color: red;
+    width: 30%;
+}
+
+.content {
+    max-height: 0;
+    overflow: hidden;
+    /* transition: max-height 0.2s ease-out; */
+}

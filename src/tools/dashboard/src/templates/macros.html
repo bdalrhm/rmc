@@ -1,0 +1,29 @@
+{% macro node_div(node) %}
+<div class="row {{ self::is_collapsible(vec=node.children) }}">
+    <div class="symbol">{{ self::is_collapsible2(vec=node.children) }}</div>
+    <div class="name">{{ node.data.name }}</div>
+    <div class="pass">{{ node.data.num_pass }}</div>
+    <div class="fail">{{ node.data.num_fail }}</div>
+</div>
+<div class="content">
+    {% for child in node.children %}
+    {{ self::node_div(node=child) }}
+    {% endfor %}
+</div>
+{% endmacro node_div %}
+
+{% macro is_collapsible(vec) %}
+{% for _ in vec %}
+collapsible
+{% break %}
+{% else %}
+normal
+{% endfor %}
+{% endmacro is_collapsible %}
+
+{% macro is_collapsible2(vec) %}
+{% for _ in vec %}
++
+{% break %}
+{% endfor %}
+{% endmacro is_collapsible2 %}

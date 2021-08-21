@@ -2,10 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 //! Data structures representing the dashboard and their utilities.
 
+use serde::Serialize;
 use std::fmt::{Display, Formatter, Result, Write};
 
 /// This data structure holds the results of running a test or a suite.
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize)]
 pub struct Node {
     pub name: String,
     pub num_pass: u32,
@@ -23,7 +24,7 @@ impl Node {
 /// represent sub-tests and sub-suites of the current test suite. This tree
 /// structure allows us to collect and display a summary for test results in an
 /// organized manner.
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Serialize)]
 pub struct Tree {
     pub data: Node,
     pub children: Vec<Tree>,
